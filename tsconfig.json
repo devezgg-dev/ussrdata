@@ -25,5 +25,5 @@
     "noEmit": true
   },
   "include": ["src", "vite.config.ts"],
-  "exclude": ["dist", "node_modules", "supabase", "functions"]
+  "exclude": ["dist", "node_modules", "supabase", "functions", "worker"]
 }

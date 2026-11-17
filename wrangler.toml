@@ -1,5 +1,11 @@
-# Cloudflare Pages project settings are configured in the Cloudflare dashboard.
-# This file documents the static output directory for Wrangler-based deployments.
+# Cloudflare Workers (정적 에셋 + API) 설정
+# name 은 Cloudflare 대시보드의 Worker 프로젝트 이름과 같아야 합니다.
 name = "inmin-jeongboguk"
+main = "worker/index.ts"
 compatibility_date = "2026-11-13"
-pages_build_output_dir = "./dist"
+
+[assets]
+directory = "./dist"
+binding = "ASSETS"
+not_found_handling = "single-page-application"
+run_worker_first = ["/api/*"]

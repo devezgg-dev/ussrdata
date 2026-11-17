@@ -64,3 +64,12 @@ Pages Secret:
 - Turnstile은 최초 방문 검문과 로그인/가입 폼에서 별도로 실행됩니다. 최초 방문 통과 상태는 현재 탭 세션에만 저장됩니다.
 - 기존의 닉네임 기반 내부 가상 이메일 계정은 새 이메일 로그인 방식과 호환되지 않습니다. 기존 회원은 계정 이메일 연결/마이그레이션 절차가 별도로 필요합니다.
 - 이 프로젝트는 반드시 실제 Supabase 프로젝트에서 SQL 실행, 이메일 확인, Turnstile 검증, 배포 빌드까지 테스트한 뒤 운영해야 합니다.
+
+## Cloudflare Workers 배포 (현재 구성)
+
+- Build command: `npm run build`
+- Deploy command: `npx wrangler deploy`
+- `wrangler.toml`의 `name`은 대시보드의 Worker 이름과 동일해야 합니다.
+- `VITE_SUPABASE_URL`, `VITE_SUPABASE_ANON_KEY`, `VITE_TURNSTILE_SITE_KEY`는 **Settings → Build → Variables and secrets** (빌드 변수)에 등록합니다. 빌드 시 코드에 포함되므로 등록 후 재배포가 필요합니다.
+- `TURNSTILE_SECRET_KEY`는 **Settings → Variables and secrets** (런타임 Secret)에 등록합니다.
+- `/api/turnstile`은 `worker/index.ts`가 처리합니다. (`functions/api/turnstile.ts`는 Pages 전용이라 Workers에서는 사용되지 않습니다.)
