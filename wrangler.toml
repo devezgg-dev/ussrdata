@@ -1,6 +1,6 @@
 # Cloudflare Workers (정적 에셋 + API) 설정
 # name 은 Cloudflare 대시보드의 Worker 프로젝트 이름과 같아야 합니다.
-name = "inmin-jeongboguk"
+name = "ussrdata"
 main = "worker/index.ts"
 compatibility_date = "2026-11-13"
 
