@@ -1,0 +1,5 @@
+# Cloudflare Pages project settings are configured in the Cloudflare dashboard.
+# This file documents the static output directory for Wrangler-based deployments.
+name = "inmin-jeongboguk"
+compatibility_date = "2026-11-13"
+pages_build_output_dir = "./dist"

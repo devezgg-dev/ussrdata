@@ -1,0 +1,3 @@
+-- Canonical schema is maintained as a versioned migration.
+-- Run supabase/migrations/202611130001_cloudflare_supabase_foundation.sql
+-- in the Supabase SQL Editor. Do not run the legacy schema from earlier versions.
