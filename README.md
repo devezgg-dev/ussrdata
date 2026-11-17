@@ -17,7 +17,7 @@
 1. https://supabase.com 에서 프로젝트를 생성합니다.
 2. **SQL Editor**에서 `supabase/migrations/202611130001_cloudflare_supabase_foundation.sql` 전체를 실행합니다.
 3. **Authentication → Providers → Email**에서 Email provider를 활성화합니다.
-4. 이 프로젝트는 가입 화면에서 이메일을 받지 않습니다. Supabase 내부용 가명 이메일을 쓰므로 **Confirm email을 비활성화**해야 합니다. 사용자가 실제 이메일을 입력하거나 수신하지 않습니다.
+4. 이 프로젝트는 가입 화면에서 이메일을 받지 않습니다. Supabase 내부용 가명 이메일을 쓰므로 **Confirm email을 활성화**해야 합니다 (현재 버전은 실제 이메일 인증 방식이며 SMTP 설정이 필요합니다. SOVIET_AUTH_SETUP_KO.md 참고). 사용자가 실제 이메일을 입력하거나 수신하지 않습니다.
 5. **Authentication → URL Configuration**에서 Cloudflare Pages 도메인을 Site URL 및 Redirect URLs에 등록합니다.
 6. **Project Settings → API**에서 Project URL과 publishable key(또는 anon key)를 준비합니다.
 

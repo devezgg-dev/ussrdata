@@ -1001,42 +1001,6 @@ class DatabaseService {
     }
     if (!isSupabaseConfigured) {
       return { success: false, message: '서비스 인증 서버가 아직 설정되지 않았습니다.' };
-      /* 로컬 데모 로그인 비활성화 */
-      const qLower = q.toLowerCase();
-      const profile = this.state.profiles.find(
-        (p) =>
-          p.nickname.toLowerCase() === qLower ||
-          (p.isAdmin && (qLower === 'admin' || qLower === '관리자' || qLower === 'user-admin'))
-      );
-      if (!profile) {
-        return { success: false, message: '등록되지 않은 닉네임입니다.' };
-      }
-
-      const user = this.state.users.find((u) => u.id === profile.id);
-      if (!user || user.passwordHash !== password) {
-        return { success: false, message: '비밀번호가 일치하지 않습니다.' };
-      }
-
-      if (user.status === 'pending') {
-        return {
-          success: false,
-          message: '현재 관리자 승인 대기 중인 계정입니다. 관리자의 승인이 완료된 후 로그인하실 수 있습니다.',
-        };
-      }
-
-      if (user.status === 'rejected') {
-        return {
-          success: false,
-          message: `관리자에 의해 가입 승인이 반려된 계정입니다.${user.rejectionReason ? ` (사유: ${user.rejectionReason})` : ''}`,
-        };
-      }
-
-      if (user.status === 'banned') {
-        return { success: false, message: '영구 정지된 계정입니다.' };
-      }
-
-      this.setCurrentUser(user.id);
-      return { success: true };
     }
     return { success: false, message: 'Supabase 환경변수를 설정해야 로그인할 수 있습니다.' };
   }
@@ -1245,7 +1209,8 @@ class DatabaseService {
 
     this.commit();
     if (isSupabaseConfigured && supabase) {
-      void supabase.from('forums').insert({ id, name: newForum.name, slug: `${slug}-${id.slice(0, 6)}`, description: newForum.description, category: newForum.category, icon: newForum.icon, banner_url: newForum.bannerUrl, rules: newForum.rules, is_public: newForum.isPublic, owner_id: data.ownerId })
+      const sb = supabase;
+      void sb.from('forums').insert({ id, name: newForum.name, slug: `${slug}-${id.slice(0, 6)}`, description: newForum.description, category: newForum.category, icon: newForum.icon, banner_url: newForum.bannerUrl, rules: newForum.rules, is_public: newForum.isPublic, owner_id: data.ownerId })
         .then(async ({ error }) => { if (error) { this.state.forums = this.state.forums.filter((f) => f.id !== id); this.notifyListeners(); console.error('포럼 저장 실패:', error.message); } else { await supabase.from('forum_subscriptions').insert({ forum_id: id, user_id: data.ownerId }); void this.syncFromServer(); } });
     }
     return newForum;

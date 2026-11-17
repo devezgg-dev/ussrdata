@@ -296,7 +296,7 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
   const handleApproveUser = (userId: string) => {
     const res = db.approveUser(userId, currentAdmin.id);
     if (res.success) {
-      notify(res.message);
+      notify(res.message || '가입 승인이 완료되었습니다.');
       refreshAll();
     } else {
       notify(res.message || '가입 승인 처리에 실패했습니다.');
@@ -308,7 +308,7 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
     if (reason === null) return;
     const res = db.rejectUser(userId, currentAdmin.id, reason);
     if (res.success) {
-      notify(res.message);
+      notify(res.message || '가입 반려 처리되었습니다.');
       refreshAll();
     } else {
       notify(res.message || '가입 반려 처리에 실패했습니다.');

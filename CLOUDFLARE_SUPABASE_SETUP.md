@@ -8,7 +8,7 @@
 ## 순서
 1. Supabase 프로젝트 생성
 2. SQL Editor에서 `supabase/migrations/202611130001_cloudflare_supabase_foundation.sql` 실행
-3. Authentication → Providers → Email 활성화 및 Confirm email 비활성화
+3. Authentication → Providers → Email 활성화 및 Confirm email **활성화** (현재 버전은 실제 이메일 인증 방식입니다. SOVIET_AUTH_SETUP_KO.md 참고)
 4. Authentication → URL Configuration에 Pages URL 추가
 5. 첫 계정 생성 후 해당 UUID를 `admin_roles`에 SQL로 직접 추가하고 프로필 status를 active로 변경
 6. `supabase functions deploy admin-delete-user` 배포
